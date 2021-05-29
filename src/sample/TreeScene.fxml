@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" prefHeight="835.0" prefWidth="1284.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TreeSceneController">
+   <children>
+      <MenuBar fx:id="menuBar" prefHeight="29.0" prefWidth="1284.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#saveTree" text="Save as..." />
+                  <MenuItem mnemonicParsing="false" onAction="#exportToPdf" text="Export to PDF" />
+              <MenuItem mnemonicParsing="false" onAction="#close" text="Home" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="filterPane" layoutY="29.0" prefHeight="808.0" prefWidth="313.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="27.0">
+         <children>
+            <Separator layoutX="310.0" orientation="VERTICAL" prefHeight="808.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label alignment="CENTER" layoutX="13.0" layoutY="9.0" prefHeight="38.0" prefWidth="279.0" text="PEOPLE" textFill="#1d8d76">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Button layoutX="225.0" layoutY="763.0" mnemonicParsing="false" onAction="#setTreeView" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: Grey;" text="Reload" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="17.0" />
+            <Button layoutX="17.0" layoutY="763.0" mnemonicParsing="false" onAction="#makeRoot" style="-fx-background-color: Grey;" text="Make root" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="17.0" />
+            <Button layoutX="117.0" layoutY="763.0" mnemonicParsing="false" onAction="#newRoot" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: Grey;" text="New root" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="125.0" />
+            <ScrollPane layoutX="6.0" layoutY="55.0" prefHeight="695.0" prefWidth="294.0" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="55.0">
+               <content>
+                  <TreeView fx:id="treeView" prefHeight="2002.0" prefWidth="294.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <ScrollPane fx:id="treeViewScrollPane" layoutX="309.0" layoutY="29.0" prefHeight="808.0" prefWidth="974.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+         <content>
+            <AnchorPane fx:id="treePane" prefHeight="3000.0" prefWidth="3000.0" style="-fx-background-color: Grey;">
+               <children>
+                  <AnchorPane fx:id="editPane" layoutX="744.0" layoutY="457.0" prefHeight="326.0" prefWidth="205.0" style="-fx-background-color: white;" visible="false">
+                     <children>
+                        <Button fx:id="buttonCancel" layoutX="131.0" layoutY="287.0" mnemonicParsing="false" onAction="#closePersonEditor" prefHeight="25.0" prefWidth="60.0" text="Cancel" />
+                        <Button fx:id="buttonSave" layoutX="11.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Save" />
+                        <Pane fx:id="infoPane" layoutX="3.0" layoutY="88.0" prefHeight="172.0" prefWidth="195.0">
+                           <children>
+                              <Label layoutX="13.0" layoutY="14.0" text="Name" />
+                              <TextField fx:id="textFieldName" layoutX="11.0" layoutY="31.0" prefHeight="25.0" prefWidth="174.0" />
+                              <Label layoutX="14.0" layoutY="63.0" text="Surname" />
+                              <TextField fx:id="textFieldSurname" layoutX="11.0" layoutY="80.0" prefHeight="25.0" prefWidth="174.0" />
+                              <Label layoutX="15.0" layoutY="115.0" text="Birthday" />
+                              <DatePicker fx:id="datePickerBirthday" layoutX="11.0" layoutY="132.0" promptText="Birthday" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="optionPane" layoutX="18.0" layoutY="5.0" prefHeight="83.0" prefWidth="166.0">
+                           <children>
+                              <RadioButton fx:id="rbNew" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#optionChanged" selected="true" text="New">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="option1" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbExisting" layoutX="83.0" layoutY="18.0" mnemonicParsing="false" onAction="#optionChanged" text="Existing" toggleGroup="$option1" />
+                              <MenuButton fx:id="peopleMenuButton" disable="true" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" text="Choose" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
